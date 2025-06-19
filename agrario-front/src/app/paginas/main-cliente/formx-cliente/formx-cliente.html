@@ -1,0 +1,92 @@
+<form [formGroup]="form"
+      class="example-container"
+      (submit)="operate()"
+      #frmCliente="ngForm">
+
+  <!-- ID oculto -->
+  <div [hidden]="true">
+    <mat-form-field>
+      <input matInput placeholder="ID" formControlName="idCliente">
+    </mat-form-field>
+  </div>
+
+  <!-- Nombre -->
+  <mat-form-field>
+    <input matInput placeholder="Nombre" formControlName="nombre">
+    @if (f['nombre'].errors?.['required'] && f['nombre'].touched) {
+      <small class="invalid">Es requerido</small>
+    }
+    @if (f['nombre'].errors?.['minlength'] && f['nombre'].touched) {
+      <small class="invalid">Mínimo 2 caracteres</small>
+    }
+    @if (f['nombre'].errors?.['maxlength'] && f['nombre'].touched) {
+      <small class="invalid">Máximo 100 caracteres</small>
+    }
+  </mat-form-field>
+
+  <!-- Tipo de Cliente -->
+  <mat-form-field>
+    <input matInput placeholder="Tipo de Cliente" formControlName="tipoCliente">
+    @if (f['tipoCliente'].errors?.['required'] && f['tipoCliente'].touched) {
+      <small class="invalid">Es requerido</small>
+    }
+    @if (f['tipoCliente'].errors?.['maxlength'] && f['tipoCliente'].touched) {
+      <small class="invalid">Máximo 50 caracteres</small>
+    }
+  </mat-form-field>
+
+  <!-- Documento de Identidad -->
+  <mat-form-field>
+    <input matInput placeholder="DNI" type="number" formControlName="documentoIdentidad">
+    @if (f['documentoIdentidad'].errors?.['required'] && f['documentoIdentidad'].touched) {
+      <small class="invalid">Es requerido</small>
+    }
+  </mat-form-field>
+
+  <!-- Teléfono -->
+  <mat-form-field>
+    <input matInput placeholder="Teléfono" formControlName="telefono">
+    @if (f['telefono'].errors?.['required'] && f['telefono'].touched) {
+      <small class="invalid">Es requerido</small>
+    }
+    @if (f['telefono'].errors?.['minlength'] && f['telefono'].touched) {
+      <small class="invalid">Mínimo 6 caracteres</small>
+    }
+    @if (f['telefono'].errors?.['maxlength'] && f['telefono'].touched) {
+      <small class="invalid">Máximo 20 caracteres</small>
+    }
+  </mat-form-field>
+
+  <!-- Email -->
+  <mat-form-field>
+    <input matInput placeholder="Email" formControlName="email" type="email">
+    @if (f['email'].errors?.['required'] && f['email'].touched) {
+      <small class="invalid">Es requerido</small>
+    }
+    @if (f['email'].errors?.['email'] && f['email'].touched) {
+      <small class="invalid">Formato de correo inválido</small>
+    }
+  </mat-form-field>
+
+  <!-- Código Cliente -->
+  <mat-form-field>
+    <input matInput placeholder="Código Cliente" formControlName="codigoCliente">
+    @if (f['codigoCliente'].errors?.['required'] && f['codigoCliente'].touched) {
+      <small class="invalid">Es requerido</small>
+    }
+    @if (f['codigoCliente'].errors?.['maxlength'] && f['codigoCliente'].touched) {
+      <small class="invalid">Máximo 20 caracteres</small>
+    }
+  </mat-form-field>
+
+  <!-- Botones -->
+  <button mat-button type="submit" [disabled]="frmCliente.invalid">
+    <mat-icon>done</mat-icon>
+    <span>Guardar</span>
+  </button>
+
+  <button mat-button type="button" routerLink="/pages/cliente">
+    <mat-icon>cancel</mat-icon>
+    <span>Cancelar</span>
+  </button>
+</form>

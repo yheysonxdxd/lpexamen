@@ -1,0 +1,70 @@
+<mat-card appearance="outlined" class="example-card">
+  <mat-card-header>
+    <mat-card-title>Formulario Asignación</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <form [formGroup]="asignacionForm" (ngSubmit)="operar()" class="form-grid">
+      
+      <div class="form-row">
+        <!-- Campo Método -->
+        <mat-form-field appearance="fill">
+          <mat-label>Método</mat-label>
+          <input
+            matInput
+            formControlName="metodo"
+            placeholder="Nombre del método"
+          />
+          <mat-error *ngIf="asignacionForm.controls['metodo'].invalid && asignacionForm.controls['metodo'].touched">
+            Este campo es requerido
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Campo Fecha de Asignación -->
+        <mat-form-field appearance="fill">
+          <mat-label>Fecha de Asignación</mat-label>
+          <input matInput type="date" formControlName="fechaAsignacion" />
+          <mat-error *ngIf="asignacionForm.controls['fechaAsignacion'].invalid && asignacionForm.controls['fechaAsignacion'].touched">
+            Fecha requerida
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-row">
+        <!-- Selector Cliente -->
+        <mat-form-field appearance="fill">
+          <mat-label>Cliente</mat-label>
+          <mat-select formControlName="cliente">
+            <mat-option *ngFor="let c of clientes" [value]="c">
+              {{ c.nombre }} <!-- Ajusta si tienes otro campo como 'razonSocial' -->
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="asignacionForm.controls['cliente'].invalid && asignacionForm.controls['cliente'].touched">
+            Cliente requerido
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Selector Servicio -->
+        <mat-form-field appearance="fill">
+          <mat-label>Servicio</mat-label>
+          <mat-select formControlName="servicio">
+            <mat-option *ngFor="let s of servicios" [value]="s">
+              {{ s.descripcion }} <!-- Ajusta si tienes otro campo como 'descripcion' -->
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="asignacionForm.controls['servicio'].invalid && asignacionForm.controls['servicio'].touched">
+            Servicio requerido
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <br />
+      <div class="example-button-row">
+        <button mat-flat-button color="primary" type="submit">Guardar</button>
+        <button mat-stroked-button color="warn" type="button" routerLink="/pages/asignacion">
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
